@@ -1,4 +1,4 @@
-const soap = import("soap");
+const soap = require("soap");
 
 soap.createClient("http://localhost:8000/products?wsdl", {}, function (err, client) {
     if(err) {
@@ -6,7 +6,7 @@ soap.createClient("http://localhost:8000/products?wsdl", {}, function (err, clie
         return;
     }
 
-    client.CretaeProduct({ name: "My product"}, function (err, result) {
+    client.CreateProduct({ name: "My product"}, function (err, result) {
         if(err) {
             console.error(
                 "Error making SOAP request:",

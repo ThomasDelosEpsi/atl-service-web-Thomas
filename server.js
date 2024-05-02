@@ -6,9 +6,19 @@ const http = require("http");
 const service = {
     ProductsService : {
         ProductsPort :{
-            CreateProduct: function (args, callback) {
-                console.log("Args : ", args);
-
+            CreateProduct: function ({name, about, price}, callback) {
+                if(!name || !about || !price) {
+                    throw {
+                        Fault: {
+                            Code: {
+                                Value: "soap.Sender",
+                                Subcode: { value: "rpc:BadArguments"},
+                            },
+                            Reason: { Text: "Processing Error"},
+                            statusCode: X,
+                        },
+                    };
+                }
                 callback({...args, id: "myid"});
             }
         }
